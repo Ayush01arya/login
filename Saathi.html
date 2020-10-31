@@ -1,0 +1,401 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head><link rel="icon" href="https://i.ibb.co/0BCw9kK/IMG-20200805-WA0019.jpg" type="image/gif" sizes="16x16">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Saathi</title>
+    
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2&family=Orbitron&display=swap");
+      body {
+        background: #000;
+        margin: 0;
+        padding: 0;
+        color: rgb(0, 195, 255);
+      }
+      .header {
+        height: fit-content;
+        width: fit-content;
+        position: relative;
+        margin: auto;
+        right: 0;
+        left: 0;
+        top: 10px;
+        font-family: "Orbitron", sans-serif;
+        font-size: 50px;
+        z-index: 10;
+      }
+      .roomName {
+        position: relative;
+        height: fit-content;
+        width: fit-content;
+        font-family: "Baloo Bhaina 2", cursive;
+        margin: auto;
+        right: 0;
+        left: 0;
+        font-size: 30px;
+      }
+      .chatBox {
+        position: relative;
+        height: 10pc;
+        width: 100%;
+        margin: auto;
+        left: 0;
+        right: 0;
+        overflow: scroll;
+      }
+      .footer {
+        position: absolute;
+        width: 25pc;
+        height: 5pc;
+        margin: auto;
+        right: 0;
+        left: 0;
+        bottom: 0;
+      }
+      .msgInput {
+        position: absolute;
+        height: 10px;
+        color: rgb(0, 195, 255);
+        width: 75%;
+        margin: auto;
+        right: 0;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        outline: none;
+        border: 0;
+        padding: 20px;
+        font-size: 25px;
+        background: transparent;
+        font-family: "Baloo Bhaina 2", cursive;
+        border-bottom: 4px solid rgb(0, 195, 255);
+        padding-right: 40px;
+      }
+      .sendBtn {
+        position: absolute;
+        height: 30px;
+        margin: auto;
+        top: 0;
+        bottom: 8px;
+        right: 15px;
+        filter: invert(1);
+        transition: 0.5s;
+      }
+      .textHolder {
+        position: relative;
+        height: fit-content;
+        width: 85%;
+        margin: auto;
+        right: 0;
+        left: 0;
+        padding: 20px;
+
+        padding-bottom: 30px;
+      }
+      .text {
+        position: relative;
+        height: fit-content;
+        width: fit-content;
+        border-bottom: 2px solid rgb(0, 195, 255);
+        font-size: 25px;
+        padding-right: 8px;
+        padding-left: 8px;
+        padding-bottom: 10px;
+        font-family: "Baloo Bhaina 2", cursive;
+        line-height: 25px;
+        text-align: justify;
+        min-width: 7pc;
+      }
+      .thierNameHolder {
+        position: absolute;
+        height: fit-content;
+        font-size: 20px;
+        line-height: 15px;
+        width: fit-content;
+        color: #000;
+        background: rgb(0, 195, 255);
+        font-family: "Baloo Bhaina 2", cursive;
+        right: 0;
+        padding: 10px;
+        padding-top: 11px;
+        border-radius:0 0 5px 5px;
+      }
+
+      .myNameHolder {
+        position: absolute;
+        height: fit-content;
+        font-size: 20px;
+        line-height: 15px;
+        width: fit-content;
+        color: #000;
+        background: rgb(0, 195, 255);
+        font-family: "Baloo Bhaina 2", cursive;
+        padding: 10px;
+        padding-top: 11px;
+        border-radius:0 0 5px 5px;
+      }
+      .theirTextManager {
+        position: relative;
+        height: fit-content;
+        width: fit-content;
+        max-width: 17pc;
+        margin-right: auto;
+        left: 0;
+      }
+      .myTextManager {
+        position: relative;
+        height: fit-content;
+        width: fit-content;
+        max-width: 17pc;
+        margin-left: auto;
+        right: 0;
+      }
+      .joinPage {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        margin: auto;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background: black;
+        z-index: +5;
+        transition: 0.5s;
+      }
+      .userInput,
+      .roomInput {
+        position: absolute;
+        height: 20px;
+        width: 80%;
+        color: orange;
+        font-family: "Baloo Bhaina 2", cursive;
+        padding: 20px;
+        margin: auto;
+        text-align: center;
+        right: 0;
+        left: 0;
+        background: transparent;
+        border: 0;
+        outline: 0;
+        font-size: 30px;
+        border-bottom: 4px solid rgb(0, 195, 255);
+      }
+      .userInput {
+        top: 16pc;
+      }
+      .roomInput {
+        top: 23pc;
+      }
+      .submitBtn {
+        position: absolute;
+        height: fit-content;
+        width: fit-content;
+        padding-left: 10px;
+        padding-right: 10px;
+        color: rgb(0, 195, 255);
+        border: 0;
+        outline: 0;
+        background: transparent;
+        font-size: 30px;
+        font-family: "Baloo Bhaina 2", cursive;
+        margin: auto;
+        right: 0;
+        left: 0;
+        border: 0;
+        border-right: 4px solid rgb(0, 195, 255);
+        border-left: 4px solid rgb(0, 195, 255);
+        top: 30pc;
+      }
+    </style>
+  </head>
+  <body class="body">
+    <div class="joinPage">
+      <form>
+        <input type="text" class="userInput" placeholder="Enter your name" />
+        <input type="text" class="roomInput" placeholder="Enter room name" />
+        <button class="submitBtn">SUBMIT</button>
+      </form>
+    </div>
+    <div class="header">Saathi</div>
+    <div class="roomName">Kabir</div>
+    <div class="roomName">Mirzapur</div>
+    <div class="chatBox"></div>
+    <div class="footer">
+      <input type="text" class="msgInput" placeholder="Type a message" />
+      <img
+        src="https://img.pngio.com/arrow-icon-png-images-vector-and-psd-files-free-download-on-arrow-symbol-png-360_360.png"
+        class="sendBtn"
+      />
+    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase.js"></script>
+    <script>
+      var firebaseConfig = {
+ apiKey: "AIzaSyCl3bdtNP3B-Q9qFseGKOVL7w1uSgOAIXg",
+ authDomain: "login-45d8e.firebaseapp.com",
+ databaseURL: "https://login-45d8e.firebaseio.com",
+ projectId: "login-45d8e",
+ storageBucket: "login-45d8e.appspot.com",
+ messagingSenderId: "19175076422",
+      };
+      firebase.initializeApp(firebaseConfig);
+      
+      
+
+ 
+      
+    </script>
+    <script>
+      var me = "",
+        room = "";
+      setInterval(function () {
+        document.querySelector(".chatBox").style.height =
+          window.innerHeight / 16.00020157734 - 13 + "pc";
+        document.querySelector(".footer").style.width =
+          window.innerWidth / 16.00020157734 - 1 + "pc";
+        document.querySelector(".msgInput").style.width =
+          window.innerWidth / 16.00020157734 - 6 + "pc";
+      }, 100);
+      document
+        .querySelector(".submitBtn")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          if (
+            document.querySelector(".userInput").value.trim() != "" &&
+            document.querySelector(".roomInput").value.trim() != ""
+          ) {
+            me = document.querySelector(".userInput").value.trim();
+            room = document.querySelector(".roomInput").value.trim();
+            var ref = firebase.database().ref("bakwaas/");
+            ref.once("value").then(function (snapshot) {
+              if (snapshot.child(room).exists()) {
+                document.querySelector(".roomName").innerHTML = room;
+                document.querySelector(".joinPage").style.filter = "opacity(0)";
+                setTimeout(function () {
+                  document.querySelector(".joinPage").style.zIndex = "-10";
+                }, 500);
+                setInterval(() => {
+                  if (document.querySelector(".msgInput").value.trim() != "")
+                    document.querySelector(".sendBtn").style.filter =
+                      "opacity(1) invert(1)";
+                  else
+                    document.querySelector(".sendBtn").style.filter =
+                      "opacity(0) invert(1)";
+                  refresh();
+                }, 500);
+              } else {
+                var confirmBox = confirm(
+                  "The room name you entered does not exist. By clicking on OK, you will be creating a new room. Cancel will take you back to the joining page"
+                );
+                if (confirmBox) {
+                  document.querySelector(".roomName").innerHTML = room;
+                  document.querySelector(".joinPage").style.filter =
+                    "opacity(0)";
+                  setTimeout(function () {
+                    document.querySelector(".joinPage").style.zIndex = "-10";
+                  }, 500);
+                  setInterval(() => {
+                    if (document.querySelector(".msgInput").value.trim() != "")
+                      document.querySelector(".sendBtn").style.filter =
+                        "opacity(1) invert(1)";
+                    else
+                      document.querySelector(".sendBtn").style.filter =
+                        "opacity(0) invert(1)";
+                    refresh();
+                  }, 500);
+                }
+              }
+            });
+          }
+        });
+      document.querySelector(".sendBtn").addEventListener("click", function () {
+        var firebaseref = firebase.database().ref();
+        firebaseref
+          .child("bakwaas")
+          .child(room)
+          .push({
+            user: me,
+            msg: document.querySelector(".msgInput").value.trim(),
+          });
+        document.querySelector(".msgInput").value = "";
+      });
+      function refresh() {
+        $.getJSON(
+          "https://login-45d8e.firebaseio.com/bakwaas/" + room + ".json",
+          response
+        );
+      }
+      function response(data) {
+        document.querySelector(".chatBox").innerHTML = "";
+        for (var i in data) {
+          if (data[i].user != me)
+            document.querySelector(".chatBox").innerHTML +=
+              '<div class="textHolder"><div class="theirTextManager"><div class="text" style="border-bottom:2px solid ' +
+              primaryColor +
+              '">' +
+              data[i].msg +
+              '</div><div class="thierNameHolder" style="background:' +
+              primaryColor +
+              '" id="theirNameHolder">' +
+              data[i].user +
+              "</div></div></div>";
+          else
+            document.querySelector(".chatBox").innerHTML +=
+              '<div class="textHolder"><div class="myTextManager"><div class="text" style="border-bottom:2px solid ' +
+              primaryColor +
+              '">' +
+              data[i].msg +
+              '</div><div class="myNameHolder" style="background:' +
+              primaryColor +
+              '" id="myNameHolder">Me</div></div></div>';
+        }
+      }
+      var isBlue = "true",
+        primaryColor = "rgb(0, 195, 255)";
+      document.querySelector(".header").addEventListener("click", function () {
+        if (isBlue) {
+          primaryColor = "tomato";
+          document.querySelector(".body").style.color = "tomato";
+          document.querySelector(".userInput").style.borderBottom =
+            "4px solid tomato";
+          document.querySelector(".roomInput").style.borderBottom =
+            "4px solid tomato";
+          document.querySelector(".submitBtn").style.borderLeft =
+            "4px solid tomato";
+          document.querySelector(".submitBtn").style.borderRight =
+            "4px solid tomato";
+          document.querySelector(".submitBtn").style.color = "tomato";
+          document.querySelector(".userInput").style.color = "tomato";
+          document.querySelector(".roomInput").style.color = "tomato";
+          document.querySelector(".msgInput").style.borderBottom =
+            "4px solid tomato";
+          document.querySelector(".msgInput").style.color = "tomato";
+          isBlue = false;
+        } else {
+          document.querySelector(".body").style.color = "rgb(0, 195, 255)";
+          document.querySelector(".userInput").style.borderBottom =
+            "4px solid rgb(0, 195, 255)";
+          document.querySelector(".roomInput").style.borderBottom =
+            "4px solid rgb(0, 195, 255)";
+          document.querySelector(".submitBtn").style.color = "rgb(0, 195, 255)";
+          document.querySelector(".msgInput").style.borderBottom =
+            "4px solid rgb(0, 195, 255)";
+          document.querySelector(".msgInput").style.color = "rgb(0, 195, 255)";
+          primaryColor = "rgb(0, 195, 255)";
+          document.querySelector(".submitBtn").style.borderLeft =
+            "4px solid rgb(0, 195, 255)";
+          document.querySelector(".submitBtn").style.borderRight =
+            "4px solid rgb(0, 195, 255)";
+          document.querySelector(".userInput").style.color = "rgb(0, 195, 255)";
+          document.querySelector(".roomInput").style.color = "rgb(0, 195, 255)";
+          isBlue = true;
+        }
+      });
+    </script>
+  </body>
+</html>
