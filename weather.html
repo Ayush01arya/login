@@ -1,0 +1,518 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Weather app</title>
+        <!-- importing ILUS3-->     
+        <link href="https://raw.githack.com/atoms19/ILUS.CSS/main/ILUS3.min.css" rel="stylesheet"></link>
+        <!-- importing sweet alert -->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <!-- importing material icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- importing jquery -->
+        <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+        <!-- importing Cairo font family -->
+        <link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
+    </head>
+    <style>
+        
+        
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@407&display=swap');
+body {
+    background-color:#000;
+    background-image:url("https://images.unsplash.com/photo-1503435824048-a799a3a84bf7?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NHx8cmFpbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1100&q=60");
+    
+    /*old bg-img link
+    https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV_r3S0VRaBqho2f9mUz47CmT4Q_IQtIzoyg&usqp=CAU
+    */
+    
+    user-select:none;
+    
+    
+    background-size:100vw 100vh;
+}
+*{
+    margin:0;
+    padding:0;
+    user-select:none;
+    outline:none;
+}
+#code{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    width:100vw;
+    text-align:center;
+}
+#card{
+    width:80vw;
+    height:80vh;    background-color:rgba(255,255,255,0.2);
+    text-align:center;
+    box-shadow:2px 3px 5px rgba(0,0,0,0.5);
+}
+#heading{
+   position:relative;
+   font-size:20px;
+   color:white;
+}
+#menu_option{
+    position:fixed;
+    color:#fff;
+    z-index:5;
+}
+.place{
+    font-size:40px;
+    margin-top:50px;
+    color:#fff;
+    font-family: 'cairo', sans-serif;
+    border-radius:30px;
+    
+}
+#place{
+    background-color:rgba(255,255,255,0.2);
+    backdrop-filter:blur(6px);
+    padding-left:10px;
+    padding-right:10px;
+    min-width:250px;
+    display:inline-block;
+    border-radius:30px;
+}
+.date{
+    color:#fff;
+    font-family: 'Raleway', sans-serif;
+    letter-spacing:3px;
+    font-weight:bolder;
+    margin-top:30px;
+    
+}
+#date{
+    background-color:rgba(255,255,255,0.2);
+    backdrop-filter:blur(6px);
+    padding:20px;
+    display:inline-block ;
+    border-radius:20px;
+}
+.temperature{
+    font-size:25px;
+    color:#fff;
+    font-weight:bold;
+    margin-top:-10px;
+    
+    
+}
+#temperature{
+    background-color:rgba(255,255,255,0.2);
+    backdrop-filter:blur(6px);
+    padding:20px;
+    min-width:250px;
+    display:inline-block ;
+    border-radius:20px;
+}
+
+#climat{
+    font-size:25px;
+    color:#fff;
+   
+    height:50px;
+    margin-top:70px;
+    margin-bottom:60px;
+   } 
+   .climate{
+   display:inline-block ;
+   font-weight:bold;
+       margin-bottom:30px;
+       background-color:rgba(255,255,255,0.2);
+    backdrop-filter:blur(6px);
+    border-radius:20px;
+    min-width:200px;
+    margin-bottom:200px;
+   }
+   #climate{
+       margin-top:-40px;
+       padding:20px;
+   }
+.line{
+    font-size:20px;
+    font-weight:bold;
+    border-bottom:5px dashed white;
+    width:100%;
+    height:15px;
+    display:none;
+}
+#help{
+position:absolute;
+    color:#fff;
+    float:right;
+    bottom:0;
+    right:0;
+    margin-bottom:85px;
+    margin-right:20px;
+}
+.popup{
+    position:absolute;
+    background-color:rgb(255,255,255);
+    border-radius:3px;
+    width:79%;
+    max-width:400px;
+    margin:auto;
+    font-family:'raleway',sans-serif;
+    font-weight:lighter ;
+    background-color:rgba(255,205,255,0.2);
+    backdrop-filter:blur(20px);
+    text-align:center;
+    box-shadow:2px 3px 5px rgba(0,0,0,0.5);
+}
+#toast {
+  visibility:hidden;
+  background-color:#333;
+  color:#fff;
+  text-align:center;
+  border-radius:2px;
+  padding:16px;
+  position:fixed;
+  z-index:1;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:30px;
+  width:70vw;
+  font-size:1rem;
+}
+
+#toast.active {
+  visibility:visible;
+  animation:fadein 0.5s, fadeout 0.5s 1.5s;
+}
+
+
+@keyframes fadein {
+  from {
+    bottom:0;
+    opacity:0;
+  }
+  to {
+    bottom:30px;
+    opacity:1;
+  }
+}
+
+
+@keyframes fadeout {
+  from {
+    bottom:30px;
+    opacity:1;
+  }
+  to {
+    bottom:0;
+    opacity:0;
+  }
+}
+#menu-help{
+    height:80vh;
+    width:80vw;
+    background-color:rgba(255,205,255,0.2);
+    backdrop-filter:blur(20px);
+    display:none;
+}
+#help-card{
+   height:90vh;
+    overflow:auto;
+
+}
+
+#select {
+    margin:20px 0;
+    margin-top:10px;
+    padding:5px 10px;
+    font-size:20px;
+    width:70%;
+    background:transparent;
+    border:0;
+    color:#fff;
+    font-weight:500;
+}
+
+#card-prompt #h2{
+    font-size:20px;
+    padding:0;
+    text-align:center;
+}
+#card-prompt h2 {
+    padding:10px;
+}
+/*CSS For Cloud Loader Created By Arnav Kumar*/
+.loader-wrapper{
+    min-width:100vw;
+    height:100vh;
+    position:fixed;
+    top:0;
+    left:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    font-family: 'Comfortaa', cursive;
+    background-color:white;
+}
+.loader-wrapper>h1{
+    margin:20px 0;
+    background:linear-gradient(145deg,#fc00ff,#00dbde);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+.loader-wrapper>div:nth-child(1){
+    position:relative;
+    height:6.3rem;
+    width:10rem;
+}
+.loader-wrapper>div:nth-child(1) div:nth-child(2){
+    width:10.5rem;
+    height:6.1rem;
+    background-repeat:no-repeat ;
+    background-position:0 -35px; background-image:url("https://upload.wikimedia.org/wikipedia/commons/4/4c/Fxemoji_u2601.svg"); 
+    background-size:cover;
+    position:absolute;
+    bottom:0;
+    z-index:5;
+}
+.loader-wrapper>div:nth-child(1) div:nth-child(1){
+    width:5rem;
+    height:5rem;
+    content:"";
+    position:absolute;
+    right:0;
+    background-repeat:no-repeat ;
+    background-size:cover;
+    background-image:url("https://upload.wikimedia.org/wikipedia/commons/c/ce/Fxemoji_u1F323.svg");
+    background-size:cover;
+    z-index:4 !important;
+    animation:spin 7s linear infinite;
+}
+@keyframes spin{
+    0%{
+        transform:rotate(0deg);
+    }
+    100%{
+        transform:rotate(360deg);
+    }
+}
+@keyframes loader-fade{
+    0%{
+        opacity:1;
+    }
+    100%{
+        opacity:0;
+    }
+}
+
+/*CSS for Cloud Loader End*/
+ul li {
+    list-style:none;
+}
+ul li a{
+    color:#fff;
+    text-decoration:none;
+}
+    </style>
+    <body onload="alert()">
+    
+     <div id="code">
+       <div id=maincard class="hide anime-fade anime-fastest">
+       <div id="card" class="card" >
+           <div id="menu_option"><i class="material-icons" onclick="ask()">edit_location</i></div>
+           
+           
+           
+           <div id="help"><i class="material-icons"></i></div>
+           <div class="heading"></div>
+           <div class="place" ><div id="place"></div></div>
+           <br />
+           <div class="date"><div id="date"></div></div>
+           <br />
+           <br />
+           <br />
+           <div class="temperature"><div id="temperature"></div></div>
+           <div id="climat"><div class="climate"><div id="climate"></div></div></div>
+           <div class="line"></div>
+       </div> 
+       </div>
+       
+       
+       
+       
+       <div class="popup card anime-zoom text-bright" id="card-prompt">
+           <h2>Enter Your Location</h2>
+           <hr class="bright">
+          
+           <input class="inp" placeholder="Enter Your City Name" id="enter">
+           <h2 id="h2">Choose Unit of Temperature</h2>
+           <select id="select">
+               <option>Degree Celcius</option>
+               <option>Fahrenheit</option>
+           </select><br>
+           <button class=" btn lime right" onclick="submition()">Submit</button>
+           <button class="red btn left" onclick="cancel()">Cancel</button>
+        <div id="help">
+               <i onclick="help()" class="material-icons">help</i>
+           </div>   
+       </div>
+       
+       
+       
+       
+       <div class="popup card anime-zoom hide text-bright" id="help-card">
+           <h2>Help</h2>
+          ❄️☀️☁️ Enter the name of the place you want to find the weather of to edit the location tap the editlocation icon on the top left ☁️❄️
+           <div class="center">
+           <img src="https://dl.dropbox.com/s/lhd3v0hd2oqktln/Screenshot__25_-removebg-preview.png" width="100%"  >
+          ❄️☀️ Code Created By Curious Coders [ Team Work ] ☀️❄️
+           <br />
+           <br />
+          ❄️ Members who have worked on Project ❄️
+           <ul style="margin-top:30px;">
+               <li><a href="https://www.sololearn.com/Profile/18717961/?ref=app">ANMOL</a></li>
+               <br>
+               <li><a href="https://www.sololearn.com/Profile/15464694/?ref=app">Atomic wave</a></li>
+               <br>
+               <li><a href="https://www.sololearn.com/Profile/9480451/?ref=app">Shivam</a></li>
+               <br />
+               <li><a href="https://www.sololearn.com/Profile/17431054/?ref=app">Arnav Kumar</a></li>
+               <br>
+               <li><a href="https://www.sololearn.com/Profile/18255097/?ref=app">Sofi</a></li>
+               <br/>
+               <li><a href="https://www.sololearn.com/Profile/14097887/?ref=app">Assassin</a></li>
+               <br />
+               <li><a href="https://www.sololearn.com/Profile/19973652/?ref=app">Mr Rahul</a></li>
+               <br />
+               <li><a href="https://www.sololearn.com/Profile/18772045/?ref=app">Harsh</a></li>
+               <br />
+               <li><a href="https://www.sololearn.com/Profile/12043843/?ref=app">Caleb</a></li>
+                <br />
+           </ul>
+           <button class="btn red" onclick="closeHelp()">Close</button></div>
+       </div>
+       
+       
+       <div id="toast"></div>
+       
+    <div id="menu-help">
+        <button class="btn"><--</button>
+    </div>
+    <!--********:Cloud Loader:*******-->
+        <div class="loader-wrapper" id="l-w">
+            <div><div></div><div></div></div>
+            <h1>Weather GUI</h1>
+         </div>
+    <!--********:Loader End:*********-->
+    </body>
+    <script>
+        
+function submition(){
+var input = document.getElementById("enter").value;
+    if(input === ""){
+        toast.innerHTML = "Input Field Can't Be Blank !";
+toast.classList.add("active");
+        setTimeout(function () { toast.className = toast.classList.remove("active"); }, 2000);
+    } else {
+
+ writeDate()
+ getData(input);
+    }
+}
+
+function cancel(){
+    document.getElementById('enter').value = "";
+}
+
+function writeDate(){
+    date=new Date()
+   var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+   
+var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]   
+   
+    document.getElementById("date").innerHTML=days[date.getDay()]+" , "+date.getDate()+" "+months[date.getMonth()]+" "+date.getFullYear()
+}
+
+            
+function getData(cityID) {  
+var unit = document.getElementById("select").value;
+fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityID + '&appid=8a58c838695dcc48f720934ab21f05f3&units=metric')  
+    .then(function(resp) { 
+        return resp.json() 
+    }) // Convert data to json
+    .then(function(data) {
+      getMain(data);
+    })
+    .catch(function() {
+      // catch any errors
+toast.innerHTML = "Invalid City Name !";
+toast.classList.add("active");
+        setTimeout(function () { toast.className = toast.classList.remove("active");}, 2000);
+        document.getElementById('card-prompt').classList.remove('hide');
+    document.getElementById('enter').value = ""; document.getElementById('maincard').classList.add('hide');
+    });
+  }
+  
+  function getMain(ab){
+   var unit = document.getElementById("select").value; document.getElementById('place').innerHTML = ab.name;
+   
+           document.getElementById('card-prompt').classList.add('hide'); document.getElementById('maincard').classList.remove('hide');
+    
+    /*if(unit === "Standard"){
+        document.getElementById("temperature").innerHTML = ab.main.temp + " °K";
+    }*/
+    
+    if(unit === "Fahrenheit"){
+        document.getElementById("temperature").innerHTML = ((ab.main.temp) * 1.8 + 32).toFixed(2) + " F";
+    } else if(unit === "Degree Celcius"){
+        document.getElementById("temperature").innerHTML = (ab.main.temp).toFixed(2) + " °C";
+    } else {
+        
+    }
+    document.getElementById('climate').innerHTML = "<br>"+ab.weather[0].description;
+  }
+
+function ask(){
+    
+    document.getElementById('card-prompt').classList.remove('hide'); document.getElementById('maincard').classList.add('hide');
+    document.getElementById("enter").value = "";
+        
+}
+
+function help(){
+    document.getElementById("help-card").classList.remove("hide")
+document.getElementById('card-prompt').classList.add('hide');
+  
+    
+}
+function closeHelp(){
+    document.getElementById("help-card").classList.add("hide")
+document.getElementById('card-prompt').classList.remove('hide')
+}
+
+/*JS For Cloud Loader*/
+setInterval(()=>{ document.getElementById("l-w").style.animation="loader-fade .3s ease-out";
+   setInterval(()=>{
+       document.getElementById("l-w").style.display="none";
+   },290);
+   
+},3000)
+/*JS For Cloud Loader End*/
+
+
+function alert(){
+     setTimeout(function () {
+swal({
+  title: "🌞☁️ Weather  app [ Curious Coders ] ❄🌧",
+  text: "This is a Weather App By Curious Coders. Hope you like it. Please make sure that you haven't given any space after City or State name. Tap on question mark icon for Help.",
+  icon: "success",
+  button: "Continue",
+  closeOnEsc: false,
+  closeOnClickOutside: false,
+})
+},2500)
+}
+        
+    </script>
+</html>
